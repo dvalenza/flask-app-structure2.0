@@ -3,7 +3,7 @@ from sqlalchemy.ext.hybrid import hybrid_property
 from flask.ext.bcrypt import Bcrypt
 from flask.ext.login import UserMixin
 
-from .database import Base
+from database import Base
 
 bcrypt = Bcrypt()
 
@@ -32,7 +32,7 @@ class User(Base, UserMixin):
     def get_id(self):
         return unicode(self.id)
     
-    def match_password(self, value):
+    def match_password(self, value):#Checks password
         return bcrypt.check_password_hash(self._password, value)
     
     def __repr__(self):

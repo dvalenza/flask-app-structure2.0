@@ -34,7 +34,7 @@ def create_app(db_uri='any'):
         
     #Register Blueprints
     app.register_blueprint(main_blueprint)
-    app.register_blueprint(user_blueprint)
+    wapp.register_blueprint(user_blueprint)
 
     #App logging
 #    app.logger.setLevel(logging.WARNING)

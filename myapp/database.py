@@ -13,7 +13,7 @@ from sqlalchemy.schema import (
 
 
 
-db_engine = None
+db_engine = create_engine('mysql://root:karma1@localhost/testdb')
 
 
 def init_engine(uri, **kwargs):
@@ -36,7 +36,7 @@ Base.query = db_session.query_property()
 
 
 def init_db():
-    import myapp.models
+    import models
     Base.metadata.create_all(db_engine)
 
 

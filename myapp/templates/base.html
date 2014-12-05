@@ -4,7 +4,6 @@
 		{% block head %}
 		<meta charset="utf-8" />
 
-
 		<title>{% block title %} base {% endblock %}</title>
 		<meta name="description" content="" />
 		<meta name="author" content="Manav Goel" />
@@ -19,8 +18,6 @@
 			</script>
 		{% endassets %}
         {% endblock %}
-	</head>
-
 	<body>
 		<div>
 			<header>
@@ -31,18 +28,32 @@
 					<a href="/">Home</a>
 				</p>
 				<p>
-					<a href="/contact">Contact</a>
+					<a href="/login">login</a>
+				</p>
+				<p>
+					<a href="/newuser">Create Account</a>
 				</p>
 			</nav>
 
 			<div id="content">
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
 				{% block content %}
 				{% endblock %}
 			</div>
 
 			<footer>
 				<p>
-					&copy; Copyright "Put name of copyright holder here"
+					&copy; Copyright "DV"
 				</p>
 			</footer>
 		</div>
