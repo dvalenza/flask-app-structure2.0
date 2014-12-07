@@ -1,19 +1,32 @@
 flask-app-structure
 ===================
 
-Flask-App-Structure
+A Flask app template with Login, and Logout, support.
 
-This is the basic flask app structure for larger applications
-which I use in my projects.
-This structure follows lots of advice from here
-https://github.com/mitsuhiko/flask/wiki/Large-app-how-to
-and here
-http://flask.pocoo.org/snippets/22/
+Flask-App-Structure, an upgraded version from: https://github.com/codecool/flask-app-structure
+
+Fixed many bugs, added creation of accounts.
 
 Dependencies of the code:
-Sqlalchemy
-Psycopg2
-Flask-WTF
-Flask-Bcrypt
-Flask-Manager
-Flask-Login
+-------------------------
+- MySQL
+- Flask-WTF
+- Flask-Bcrypt
+- Flask-Manager
+- Flask-Login
+- Flask-openid
+- Flask-script
+- Flask-assests
+
+To Run:
+-------
+1:) Edit database.py db_engine to your mysql credentials
+```
+db_engine = create_engine('mysql://USERNAME:PASSWORD@localhost/DATABASE')
+```
+2:) Initialize a new database:
+```
+Python
+from databse import init_db
+init_db()
+```
