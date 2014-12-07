@@ -38,23 +38,20 @@ class User(Base, UserMixin):
     def __repr__(self):
         return u"User<%s>" % self.username
 
-class Item(Base):
+class Item():
     __tablename__ = 'items'
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_Key=True)
     owner = Column(String(50), nullable = False)
     name = Column(String(50), nullable = False)
     description = Column(String(150))
     quantity = Column(Integer)
-    url = Column(String(50))
     creation_date = Column(DateTime, default=text("current_timestamp"))
 
-    def __init__(self, owner, name, description, quantity, url):
+    def __init__(self, owner, name, description, quantity):
         self.owner = owner
         self.name = name
         self.description = description
         self.quantity = quantity
-        self.url = url
 
-    def __repr__(self):
-        return u"Name<%s>" % self.name
+    

@@ -14,11 +14,10 @@ from .models import User, bcrypt
 
 from .home.views import mod as main_blueprint
 from .users.views import mod as user_blueprint
-
+from .items.views import mod as items_blueprint
 
 login_manager = LoginManager()
 assets = Environment()
-
 
 
 def create_app(db_uri='any'):
@@ -26,7 +25,8 @@ def create_app(db_uri='any'):
     app = Flask(__name__)
     app.config.from_object('myapp.default_config')
     app.config.from_pyfile(os.path.join(app.instance_path, 'config.py'))
-    
+    app.config['UPLOAD_FOLDER'] = '/'
+
     if db_uri == 'Test':
         init_engine(app.config['TEST_DATABASE_URI'])
     else:
@@ -35,6 +35,7 @@ def create_app(db_uri='any'):
     #Register Blueprints
     app.register_blueprint(main_blueprint)
     app.register_blueprint(user_blueprint)
+    app.register_blueprint(items_blueprint)
 
     #App logging
 #    app.logger.setLevel(logging.WARNING)

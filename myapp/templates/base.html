@@ -1,61 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		{% block head %}
-		<meta charset="utf-8" />
-
-		<title>{% block title %} base {% endblock %}</title>
-		<meta name="description" content="" />
-		<meta name="author" content="Manav Goel" />
-		
-		{% assets 'css_all' %}
-			<link rel='stylesheet' href="{{ ASSET_URL }}"/>
-		{% endassets %}
-		
-		{% assets 'js_all' %}
-			<script type="text/javascript" src="{{ ASSET_URL }}">
-				
-			</script>
-		{% endassets %}
-        {% endblock %}
-	<body>
-		<div>
-			<header>
-				<h1>Heading</h1>
-			</header>
-			<nav>
-				<p>
-					<a href="/">Home</a>
-				</p>
-				<p>
-					<a href="/login">login</a>
-				</p>
-				<p>
-					<a href="/newuser">Create Account</a>
-				</p>
-			</nav>
-
-			<div id="content">
-
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul class=flashes>
-    {% for message in messages %}
-      <li>{{ message }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
-
-				{% block content %}
-				{% endblock %}
-			</div>
-
-			<footer>
-				<p>
-			            By: Codecool, Snowblind
-				</p>
-			</footer>
-		</div>
-	</body>
+  <head>
+    {% block head %}
+    <meta charset="utf-8" />
+    <title>{% block title %} base {% endblock %}</title>
+    <meta name="description" content="" />
+    <meta name="author" content="Snowblind" />	
+    {% assets 'css_all' %}
+    <link rel='stylesheet' href="{{ ASSET_URL }}"/>
+    {% endassets %}
+    {% assets 'js_all' %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+    {% endblock %}
+    <body>
+      <div>
+	<header>
+	  <h1>Heading</h1>
+	</header>
+	<nav>
+	  <p>
+	    <a href="/">Home</a>
+	  </p>
+	  <p>
+	    <a href="/login">login</a>
+	  </p>
+	  {% if current_user.is_authenticated() %}
+	  {% else %}
+	  <a href="{{ url_for('users.newuser') }}">Create Account</a>
+	  {% endif %}
+	</nav>
+	<div id="content">
+	  {% with messages = get_flashed_messages() %}
+	  {% if messages %}
+	  <ul class=flashes>
+	    {% for message in messages %}
+	    <li>{{ message }}</li>
+	    {% endfor %}
+	  </ul>
+	  {% endif %}
+	  {% endwith %}
+	  {% block content %}
+	  {% endblock %}
+	</div>
+	<footer>
+	  <p>
+	    By: Snowblind
+	  </p>
+	</footer>
+      </div>
+    </body>
 </html>

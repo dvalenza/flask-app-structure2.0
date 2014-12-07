@@ -1,0 +1,25 @@
+from flask import Blueprint, render_template, request, flash, url_for, redirect
+from flask.ext.login import login_required, current_user
+from werkzeug import secure_filename
+
+from ..database import db_session
+from ..models import Item
+
+from forms import CreateNewItemForm
+
+mod = Blueprint('items', __name__,
+                template_folder='templates',
+                static_folder='static')
+
+UPLOAD_FOLDER = '/uploads'
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+@mod.route('/newitem', methods=['GET','POST'])
+def newItem():
+    form = CreateNewItemForm()
+    if form.validate_on_submit():
+        fileName = secure_filename(form.fileName.file.filename)
+        newItem = Item(str(current_user()), form.name.data, form.description.data,
+                       form.quantity.data,filename)
+    return render_template('items/newitem.html', form=form)

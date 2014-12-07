@@ -13,3 +13,4 @@ class CreateAccForm(Form):
     password = PasswordField('Password', validators=[Required(), Length(min=5)])
     email = TextField('Email', validators=[Required()])
     submit = SubmitField("Create account")
+.

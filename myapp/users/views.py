@@ -35,9 +35,15 @@ def login():
 def newuser():
     form = CreateAccForm()
     if form.validate_on_submit():
+      user = User.query.filter_by(email = form.email.data.lower()).first()    
+      if user: #check if email exists
+        flash('Email Already Exists!')
+      else:
         newAcc=User(form.username.data,form.email.data,form.password.data)
         db_session.add(newAcc)
         db_session.commit()
+        login_user(newAcc)
+        flash('You are successfully logged in.')
         return redirect(url_for('home.home'))
     return render_template('users/newuser.html', form=form)
 
